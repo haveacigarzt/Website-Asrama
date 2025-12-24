@@ -1,0 +1,58 @@
+<span class="anchor" id="fasilitas_anchor"></span>
+<section id="fasilitas" class="border-bottom border-1 shadow text-white">
+   <div class="container">
+      <div id="fasilitas_section_inside" class="my-4">
+         <div class="row pe-lg-5">
+            <div class="col-12 col-md-4 col-lg-6 d-flex flex-column justify-content-center align-items-center align-items-lg-end pe-md-4 pt-3">
+               <h2 class="border-bottom border-1 border-white text-center text-lg-end px-4 mb-lg-3">Fasilitas Asrama</h2>
+               <p class="text-center text-lg-end mb-0 deskripsi">{{ fasilitas["deskripsi_fasilitas"] }}</p>
+            </div>
+            {% for el in (fasilitas["butir_fasilitas"]) %}
+            {% if loop.index <= 2 %}
+               <div class="col-md-4 col-lg-3 py-3 d-none d-md-block">
+                  <div class="card mx-2 h-100 border-0 shadow">
+                     <div class="card-body">
+                        <h4 class="card-title mb-1">{{ el["name"] }}</h4>
+                        <div class="card-text overflow-y-auto">
+                           <p class="deskripsi-small">{{ el["value"] }}</p>
+                        </div>
+                     </div>
+                     <img src="{{ el['gambar'] }}" class="card-img-bottom h-65" alt="...">
+                  </div>
+               </div>
+            {% endif %}
+            {% endfor %}
+         </div>
+         <div class="row overflow-x-scroll flex-nowrap d-none d-md-flex pe-lg-5">
+            {% for el in fasilitas["butir_fasilitas"] %}
+               {% if loop.index > 2 %}
+               <div class="col-4 col-lg-3 py-3">
+                  <div class="card mx-2 h-100 border-0 shadow">
+                     <div class="card-body">
+                        <h4 class="card-title mb-1">{{ el["name"] }}</h4>
+                        <div class="card-text overflow-y-auto">
+                           <p class="deskripsi-small">{{ el["value"] }}</p>
+                        </div>
+                     </div>
+                     <img src="{{ el['gambar'] }}" class="card-img-bottom h-65" alt="...">
+                  </div>
+               </div>
+               {% endif %}
+            {% endfor %}
+         </div>
+         <div class="row overflow-x-scroll flex-nowrap d-flex d-md-none">
+            {% for el in fasilitas["butir_fasilitas"] %}
+               <div class="col-md-4 py-3 col-9 col-sm-8">
+                  <div class="card mx-0 border-0 shadow">
+                     <div class="card-body">
+                        <h4 class="card-title pb-1 mb-2">{{ el["name"] }}</h4>
+                        <p class="card-text overflow-y-auto deskripsi-small">{{ el["value"] }}</p>
+                     </div>
+                     <img src="{{ el['gambar'] }}" class="card-img-bottom" alt="...">
+                  </div>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</section>

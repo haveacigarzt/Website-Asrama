@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4">
+      <h2 class="text-center text-dark">Admin - Edit Konten</h2>
+      {% include "admin_partials/edit_konten_navbar.html" %}
+   </div>
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-4 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row gy-4">
+         <form id="kontak_form" method="post" action="{{url_for('admin_kontak')}}" class="content_form col-12 shadow px-4 pb-4 pt-2 rounded bg-con-input">
+            {{form_kontak.hidden_tag()}}
+            <h3 class="mb-0 ps-lg-2">Kontak Asrama</h3>
+            <div class="row gy-3 mx-0 mt-1 mt-md-0">
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="whatsapp"><h5>Whatsapp</h5></label>
+                     <input required class="form-control" type="text" name="whatsapp" id="whatsapp" value="{{kontak['fields']['whatsapp']}}" data-before="{{kontak['fields']['whatsapp']}}">
+                  </div>
+               </div>
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="email"><h5>Email</h5></label>
+                     <input required class="form-control" type="text" name="email" id="email" value="{{kontak['fields']['email']}}" data-before="{{kontak['fields']['email']}}">
+                  </div>
+               </div>
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="instagram"><h5>Instagram</h5></label>
+                     <input required class="form-control" type="text" name="instagram" id="instagram" value="{{kontak['fields']['instagram']}}" data-before="{{kontak['fields']['instagram']}}">
+                  </div>
+               </div>
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="youtube"><h5>Youtube</h5></label>
+                     <input required class="form-control" type="text" name="youtube" id="youtube" value="{{kontak['fields']['youtube']}}" data-before="{{kontak['fields']['youtube']}}">
+                  </div>
+               </div>
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="alamat"><h5>Alamat</h5></label>
+                     <textarea required class="form-control" name="alamat" id="alamat" cols="10" rows="5" data-before="{{kontak['fields']['alamat']}}">{{kontak['fields']['alamat']}}</textarea>
+                  </div>
+               </div>
+               <div class="col-12 col-lg-6 px-0 px-lg-2 my-2 my-sm-3 my-md-4">
+                  <div class="p-3 rounded shadow bg-input">
+                     <label class="form-label" for="maps"><h5>URL Google Maps</h5></label>
+                     <textarea required class="form-control" name="maps" id="maps" cols="10" rows="5" data-before="{{kontak['fields']['maps']}}">{{kontak['fields']['maps']}}</textarea>
+                  </div>
+               </div>
+               <div class="d-flex flex-column align-items-center py-2">
+                  <div class="alert alert-warning d-none" role="alert">
+                     Tidak terdeteksi perubahan pada form Kontak Asrama.
+                  </div>
+                  <div id="submit-button-container">
+                     {{form_kontak.submit(class="btn btn-success px-3", disabled=true)}}
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

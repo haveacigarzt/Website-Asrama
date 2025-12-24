@@ -1,0 +1,133 @@
+<section id="penghuni" class="shadow text-black">
+   <div class="container py-45 text-center rounded" id="penghuni_div">
+      <div class="px-1 px-md-3 px-lg-5 pt-lg-3">
+         <h2 class="border-bottom border-1 border-black text-center px-4 d-inline-block mb-lg-3">Kepengurusan & Penghuni</h2>
+         <p class="deskripsi-large px-lg-5 px-2 px-md-3" style="margin-bottom: .5rem;">
+            Asrama berada dibawah naungan <a class="dark-link" href="https://www.ypsbr.org/" target="_blank">Yayasan Pendidikan Sekolah Bruder (YPSB)</a> yang dibentuk oleh <a class="dark-link" href="https://www.brudermtb.org/" target="_blank">Kongregasi Bruder MTB</a>. Dalam melaksanakan pembinaan, yayasan menempatkan seorang Bruder untuk menjadi Pembina Asrama.
+         </p>
+         <p class="deskripsi-large">
+            Ketua Asrama, Bendahara, Sekretaris dan para Seksi merupakan penghuni asrama yang dipilih secara musysawarah setiap tahunnya. Berikut adalah struktur pengurus & daftar penghuni asrama saat ini.
+         </p>
+      </div>
+      <div class="d-flex justify-content-center">
+         <div class="p-2 toggle-pengurus mb-3 rounded">
+            <input type="radio" class="btn-check" name="options-outlined2" id="success-outlined2" autocomplete="off" checked>
+            <label class="btn btn-outline-success toggle-pengurus-btn" for="success-outlined2">Struktur Pengurus</label>
+            <input type="radio" class="btn-check" name="options-outlined2" id="danger-outlined2" autocomplete="off">
+            <label class="btn btn-outline-danger toggle-pengurus-btn" for="danger-outlined2">Daftar Penghuni</label>
+         </div>
+      </div>
+      <div class="mb-3 mt-2 mx-1 mx-sm-4 shadow border p-3 pb-2 pb-sm-0 rounded bg-paper d-block" id="struktur_pengurus">
+         <h3 class="mb-2">Struktur Pengurus {{kepengurusan["tahun_kepengurusan"]}}</h3>
+         <div class="row justify-content-center p-0 p-sm-3">
+            <div class="card col-10 col-sm-9 col-md-8 col-lg-6 col-xl-5 shadow-sm px-1 px-sm-2 px-md-3">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item m-0 p-1"><b>KETUA YAYASAN</b></li>
+                  <li class="list-group-item m-0 p-1"><p class="deskripsi mb-0">{{kepengurusan["pengurus_inti"]["ketua_yayasan"]}}</p></li>
+               </ul>
+            </div>
+            <div>
+               <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="card col-10 col-sm-9 col-md-8 col-lg-6 col-xl-5 shadow-sm px-1 px-sm-2 px-md-3">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item m-0 p-1"><b>PEMBINA ASRAMA</b></li>
+                  <li class="list-group-item m-0 p-1"><p class="mb-0 deskripsi">{{kepengurusan["pengurus_inti"]["pembina"]}}</p></li>
+               </ul>
+            </div>
+            <div>
+               <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="card col-10 col-sm-9 col-md-8 col-lg-6 col-xl-5 shadow-sm px-1 px-sm-2 px-md-3">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item m-0 p-1"><b>KETUA ASRAMA</b></li>
+                  <li class="list-group-item m-0 p-1"><p class="mb-0 deskripsi">{{kepengurusan["pengurus_inti"]["ketua_asrama"]}}</p></li>
+               </ul>
+            </div>
+            <div>
+               <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="row justify-content-between justify-content-lg-center" id="sekretaris_row">
+               <div class="sekretaris_row_side card shadow-sm px-1 px-sm-2 px-md-3">
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item m-0 p-1"><b>SEKRETARIS</b></li>
+                     <li class="list-group-item m-0 p-1"><p class="mb-0 deskripsi">{{kepengurusan["pengurus_inti"]["sekretaris"]}}</p></li>
+                  </ul>
+               </div>
+               <div class="sekretaris_row_center d-flex justify-content-center align-items-center p-0">
+                  <i class="fas fa-arrows-left-right"></i>
+               </div>
+               <div class="sekretaris_row_side card shadow-sm px-1 px-sm-2 px-md-3">
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item m-0 p-1"><b>BENDAHARA</b></li>
+                     <li class="list-group-item m-0 p-1"><p class="mb-0 deskripsi">{{kepengurusan["pengurus_inti"]["bendahara"]}}</p></li>
+                  </ul>
+               </div>
+            </div>
+            <div>
+               <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="rounded border shadow-sm mb-2 px-2 col-11 col-sm-12">
+               <div class="pt-2 pb-1 mb-2 border-bottom">
+                  <b class="extend-b-card-penghuni">SEKSI</b>
+               </div>
+               <div class="row overflow-x-scroll overflow-xl-unset flex-nowrap flex-xl-wrap gx-3 mb-3 gy-3 gy-lg-0">
+                  {% for el in kepengurusan["seksi"] %}
+                  <div class="col-9 col-sm-8 col-md-5 col-xl-3">
+                     <div class="card shadow-sm h-100">
+                        <ul class="list-group list-group-flush">
+                           <li class="list-group-item m-0 p-1"><b>{{el["name"].replace("_"," ")|upper}}</b></li>
+                           <li class="list-group-item m-0 p-1">
+                              <small class="mb-0">KOORDINATOR</small>
+                              <p class="mb-0 deskripsi">{{el["value"]["koordinator"]}}</p>
+                           </li>
+                           <li class="list-group-item m-0 p-1 pb-2">
+                              <small class="mb-0">ANGGOTA</small>
+                              {% for anggota in el["value"]["anggota"] %}
+                              <p class="mb-0 deskripsi"> <small>{{loop.index}}.</small> {{anggota}}</p>
+                              {% endfor %}
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="mb-3 mt-2 mx-1 mx-sm-4 shadow border p-3 pb-0 rounded bg-paper d-none" id="daftar_penghuni">
+         <h3 class="mb-2">Daftar Penghuni</h3>
+         <div class="w-100 overflow-x-auto">
+            <table id="tablePenghuni" class="display nowrap p-3 rounded shadow-sm border bg-white w-100">
+               <thead>
+                  <tr>
+                     <th rowspan="2" class="border-end">Nama</th>
+                     <th colspan="1" rowspan="2" class="border-end">Tahun Masuk</th>
+                     <th colspan="1" rowspan="2" class="border-end">Asal Daerah</th>
+                     <th colspan="1" rowspan="2" class="border-end">Status</th>
+                     <th colspan="3" class="text-center">Perkuliahan</th>
+                  </tr>
+                  <tr>
+                     <th>Jurusan</th>
+                     <th>Angkatan</th>
+                     <th>Kampus</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for el in daftar_penghuni %}
+                  <tr>
+                     <td>{{el["nama"]}}</td>
+                     <td>{{el["tahun_masuk"]}}</td>
+                     <td>{{el["asal_daerah"]}}</td>
+                     <td>{{el["status"]}}</td>
+                     <td>{{el["jurusan"]}}</td>
+                     <td>{{el["angkatan"]}}</td>
+                     <td>{{el["kampus"]}}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</section>

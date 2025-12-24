@@ -1,0 +1,121 @@
+<span class="anchor" id="kegiatan_anchor"></span>
+<section id="kegiatan" class="shadow text-black">
+   <div class="container py-4">
+      <div class="row pt-3">
+         <div class="col-12 col-md-10 col-lg-8 d-flex flex-column align-items-center text-center mx-auto">
+            <h2 class="border-1 border-black border-bottom px-4 mb-lg-3">Kegiatan Rutin</h2>
+            <p class="mb-0 deskripsi px-2">{{ kegiatan["deskripsi_kegiatan"] }}</p>
+         </div>
+      </div>
+      <div class="row overflow-x-scroll overflow-md-unset flex-nowrap flex-lg-wrap pe-lg-4 d-flex d-lg-none px-3 px-sm-0">
+         {% for el in kegiatan["butir_kegiatan"] %}
+            {% if loop.index <= 3 %}
+            <div class="col-md-4 py-3 p-md-3 col-10 col-sm-8">
+               <div class="card h-100">
+                  <img src="{{ el['gambar'] }}" class="card-img-top h-75" alt="...">
+                  <div class="card-body">
+                     <h4 class="card-title">{{ el['name'] }}</h4>
+                     <div class="card-text overflow-y-auto">
+                        <p class="deskripsi-small mb-0">
+                           {{ el['value'] }}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+         {% endfor %}
+         {% for el in kegiatan["butir_kegiatan"] %}
+         {% if loop.index > 3 %}
+         <div class="col-md-4 py-3 col-10 col-sm-8 d-block d-md-none">
+            <div class="card h-100">
+               <img src="{{ el['gambar'] }}" class="card-img-top h-75" alt="...">
+               <div class="card-body">
+                  <h4 class="card-title">{{ el['name'] }}</h4>
+                  <div class="card-text overflow-y-auto">
+                     <p class="deskripsi-small mb-0">
+                        {{ el['value'] }}
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+      <div class="row overflow-x-scroll flex-nowrap d-none d-md-flex d-lg-none pe-lg-4">
+         {% for el in kegiatan["butir_kegiatan"] %}
+         {% if loop.index > 3 %}
+         <div class="col-md-4 py-3 p-md-3 col-8">
+            <div class="card h-100">
+               <img src="{{ el['gambar'] }}" class="card-img-top h-75" alt="...">
+               <div class="card-body">
+                  <h4 class="card-title">{{ el['name'] }}</h4>
+                  <div class="card-text overflow-y-auto">
+                     <p class="deskripsi-small mb-0">
+                        {{ el['value'] }}
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+      <div class="row overflow-x-scroll overflow-md-unset flex-nowrap flex-lg-wrap pe-lg-4 d-none d-lg-flex">
+         {% for el in kegiatan["butir_kegiatan"] %}
+            {% if loop.index <= 4 %}
+            <div class="col-md-3 py-3 p-xl-3 p-xxl-4 col-10 col-sm-8">
+               <div class="card h-100">
+                  <img src="{{ el['gambar'] }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h4 class="card-title">{{ el['name'] }}</h4>
+                     <div class="card-text overflow-y-auto">
+                        <p class="deskripsi-small mb-0">
+                           {{ el['value'] }}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+         {% endfor %}
+         {% for el in kegiatan["butir_kegiatan"] %}
+         {% if loop.index > 4 %}
+         <div class="col-md-3 py-3 p-xl-3 p-xxl-4 col-10 col-sm-8 d-block d-md-none">
+            <div class="card h-100">
+               <img src="{{ el['gambar'] }}" class="card-img-top h-75" alt="...">
+               <div class="card-body">
+                  <h4 class="card-title">{{ el['name'] }}</h4>
+                  <div class="card-text overflow-y-auto">
+                     <p class="deskripsi-small mb-0">
+                        {{ el['value'] }}
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+      <div class="row overflow-x-scroll flex-nowrap d-none d-lg-flex pe-lg-4">
+         {% for el in kegiatan["butir_kegiatan"] %}
+         {% if loop.index > 4 %}
+         <div class="col-md-3 py-3 p-xl-3 p-xxl-4 col-8">
+            <div class="card h-100">
+               <img src="{{ el['gambar'] }}" class="card-img-top h-75" alt="...">
+               <div class="card-body">
+                  <h4 class="card-title">{{ el['name'] }}</h4>
+                  <div class="card-text overflow-y-auto">
+                     <p class="deskripsi-small">
+                        {{ el['value'] }}
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+   </div>
+</section>

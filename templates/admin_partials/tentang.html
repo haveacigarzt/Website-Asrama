@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4">
+      <h2 class="text-center text-dark">Admin - Edit Konten</h2>
+      {% include "admin_partials/edit_konten_navbar.html" %}
+   </div>
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-4 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row gy-4">
+         <form id="tentang_form" method="post" action="{{url_for('admin_tentang')}}" class="content_form col-12 shadow px-4 pb-4 pt-2 rounded bg-con-input">
+            {{form_tentang.hidden_tag()}}
+            <h3>Tentang</h3>
+            <div class="row gy-3 mx-0">
+               {% for field in tentang["fields"] %}
+                  {% if field["type"] == "list" %}
+                     <div class="row mx-0 my-3 p-3 rounded shadow bg-input">
+                        <label class="col-12 form-label mb-0 mt-2" for="{{field['name']}}"><h5>{{field["name"].replace("_", " ")|capitalize}}</h5></label>
+                        {% for el in field['value'] %}
+                        <div class="row mx-0 my-3 p-3 rounded shadow bg-artikel">
+                           <div class="col-11 col-lg-10 my-2 pe-3 ps-0">
+                              <div class="row mx-0 p-0">
+                                 <div class="col-12 p-0">
+                                    <label class="form-label" for="butir_{{field['name']}}_{{loop.index}}"><h6>Butir {{field['name']}}</h6></label>
+                                    <input type="text" class="form-control" name="{{field['name']}}[]" id="butir_{{field['name']}}_{{loop.index}}" data-before="{{el}}" value="{{el}}" required>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-1 col-lg-2 col-button-edit-admin p-0 m-0">
+                              <button type="button" class="btn btn-secondary shadow-sm" data-name="{{field['name']}}" onclick="add_list(event)">
+                                 <i class="fa-solid fa-plus" data-name="{{field['name']}}"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger shadow-sm" data-name="butir {{field['name']}}" onclick="remove_card(event)">
+                                 <i class="fa-solid fa-trash" data-name="butir {{field['name']}}"></i>
+                              </button>
+                           </div>
+                        </div>
+                        {% endfor %}
+                     </div>
+                  {% else %}
+                     <div class="col-12 p-3 rounded shadow my-4 bg-input">
+                        <label class="form-label" for="{{field['name']}}"><h5>{{field["name"].replace("_", " ")|capitalize}}</h5></label>
+                        {% if field["type"] == "textarea" %}
+                           <textarea required class="form-control" name="{{field['name']}}" id="{{field['name']}}" cols="10" rows="5" data-before="{{field['value']}}">{{field['value']}}</textarea>
+                        {% else %}
+                           <input required class="form-control" type="{{field['type']}}" name="{{field['name']}}" id="{{field['name']}}" value="{{field['value']}}" data-before="{{field['value']}}">
+                        {% endif %}
+                     </div>
+                  {% endif %}
+               {% endfor %}
+               <div class="d-flex flex-column align-items-center py-2">
+                  <div class="alert alert-warning d-none" role="alert">
+                     Tidak terdeteksi perubahan pada form Tentang.
+                  </div>
+                  <div id="submit-button-container" class="d-flex flex-column">
+                     {{form_tentang.submit(class="btn btn-success px-3", disabled=true)}}
+                     <small class="text-muted" id="sumbit_subtitle">atau Ctrl + Enter</small>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

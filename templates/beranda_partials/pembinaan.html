@@ -1,0 +1,24 @@
+<section id="pembinaan_section">
+   <div class="container">
+      <div id="pembinaan_section_inside" class="my-4 px-4 pt-4 pb-3">
+         <h2 class="mt-0 mt-md-2 ps-4 border-bottom border-1 mb-lg-3 me-lg-4">Pembinaan di Asrama</h2>
+         <p class="d-inline-block w-100 w-lg-70 text-end deskripsi mb-1 mb-sm-3 me-lg-4 ps-md-3">{{pembinaan["deskripsi_pembinaan"]}}</p>
+         <div class="pembinaan-grid">
+         {% for el in pembinaan["butir_pembinaan"] %}
+            <div class="{{'col-pembinaan' if pembinaan['butir_pembinaan']|length > 3  else 'col-10 col-sm-9 col-md-5 col-lg-4' }} card-pembinaan">
+               <div class="d-flex flex-column mb-1 card-pembinaan-inside">
+                  <img class="rounded ratio-1x1 w-100" src="{{ el['gambar']}}" alt="" srcset="">
+                  <h4 class="pb-1 pembinaan-title border-1 border-bottom border-secondary mx-4 mb-0">{{el["name"]}}</h4>
+               </div>
+               <div class="h-27 w-100 overflow-y-auto overflow-y-xl-unset pt-1">
+                  <p class="text-center deskripsi-small mb-0">{{el["value"]}}</p>
+               </div>
+            </div>
+         {% endfor %}
+         </div>
+      </div>
+   </div>
+</section>
+<div class="container">
+   <div id="pembinaan_footer"></div>
+</div>

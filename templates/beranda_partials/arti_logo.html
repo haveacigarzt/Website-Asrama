@@ -1,0 +1,22 @@
+<section id="arti_logo" class="shadow">
+   <div class="container py-4">
+      <div id="arti_logo_inside" class="rounded p-4">
+         <h2 class="mb-2 border-1 border-bottom pe-4 d-inline-block mb-lg-3">Makna & Arti Logo Asrama</h2>
+         <p class="deskripsi">{{makna_arti_logo["deskripsi_makna_arti_logo"]}}</p>
+         <div class="row flex-column flex-md-row align-items-center" id="arti_logo_row">
+            <div class="col-8 col-md-4 card-arti">
+               <img class="ratio-1x1" src="{{ url_for('static', filename='pictures/LOGO ASRAMA.png') }}" alt="" srcset="">
+            </div>
+            <div class="col-12 col-md-8 card-arti mt-3 mt-sm-0">
+               <div class="my-transparent rounded p-2 pb-4">
+                  <ul class="mb-0">
+                     {% for el in makna_arti_logo["butir_makna_arti_logo"] %}
+                     <li class="deskripsi">{{el}}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

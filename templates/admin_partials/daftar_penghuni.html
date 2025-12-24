@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4">
+      <h2 class="text-center text-dark">Admin - Edit Konten</h2>
+      {% include "admin_partials/edit_konten_navbar.html" %}
+   </div>
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-4 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row gy-4">
+         <form id="daftar_penghuni_form" method="post" action="{{url_for('admin_daftar_penghuni')}}" class="content_form col-12 shadow px-3 pb-3 px-sm-4 pt-3 rounded bg-con-input">
+            {{form_daftar_penghuni.hidden_tag()}}
+            <h3>Daftar Penghuni</h3>
+            <div class="row gy-3 mx-0">
+               {% for el in daftar_penghuni["fields"] %}
+                  <div class="row mx-0 my-4 p-2 p-md-3 rounded shadow bg-card">
+                     <div class="col-12 col-md-11">
+                        <div class="row px-0 px-md-2 py-1 py-md-3 mb-3 mb-md-0">
+                           <div class="col-6 d-flex flex-column justify-content-between">
+                              <div class="mb-1 mb-sm-2 mb-md-3">
+                                 <label class="form-label" for="nama_{{loop.index}}"><h6>Nama</h6></label>
+                                 <input required class="form-control" type="text" name="nama[]" id="nama_{{loop.index}}" value="{{el['nama']}}" data-before="{{el['nama']}}">
+                              </div>
+                              <div class="mb-1 mb-sm-2 mb-md-3 d-flex">
+                                 <div>
+                                    <label class="form-label" for="tahun_masuk_{{loop.index}}"><h6>Tahun Masuk</h6></label>
+                                    <input required class="form-control" type="text" name="tahun_masuk[]" id="tahun_masuk_{{loop.index}}" value="{{el['tahun_masuk']}}" data-before="{{el['tahun_masuk']}}">
+                                 </div>
+                                 <div class="ms-4">
+                                    <label class="form-label" for="status{{loop.index}}"><h6>Status</h6></label>
+                                    <input required class="form-control" type="text" name="status[]" id="status{{loop.index}}" value="{{el['status']}}" data-before="{{el['status']}}">
+                                 </div>
+                              </div>
+                              <div>
+                                 <label class="form-label" for="asal_daerah_{{loop.index}}"><h6>Asal Daerah</h6></label>
+                                 <input required class="form-control" type="text" name="asal_daerah[]" id="asal_daerah_{{loop.index}}" value="{{el['asal_daerah']}}" data-before="{{el['asal_daerah']}}">
+                              </div>
+                           </div>
+                           <div class="col-6">
+                              <div class="mb-1 mb-sm-2 mb-md-3">
+                                 <label class="form-label" for="jurusan_{{loop.index}}"><h6>Jurusan</h6></label>
+                                 <input required class="form-control" type="text" name="jurusan[]" id="jurusan_{{loop.index}}" value="{{el['jurusan']}}" data-before="{{el['jurusan']}}">
+                              </div>
+                              <div class="mb-1 mb-sm-2 mb-md-3">
+                                 <label class="form-label" for="angkatan_{{loop.index}}"><h6>Angkatan</h6></label>
+                                 <input required class="form-control" type="text" name="angkatan[]" id="angkatan_{{loop.index}}" value="{{el['angkatan']}}" data-before="{{el['tahun_masuk']}}">
+                              </div>
+                              <div>
+                                 <label class="form-label" for="kampus_{{loop.index}}"><h6>Kampus</h6></label>
+                                 <input required class="form-control" type="text" name="kampus[]" id="kampus_{{loop.index}}" value="{{el['kampus']}}" data-before="{{el['kampus']}}">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="mb-3 mb-md-0 col-12 col-md-1 d-flex flex-md-column align-items-center justify-content-evenly">
+                        <button type="button" class="btn btn-secondary shadow-sm" data-name="daftar_penghuni" onclick="add_card(event)">
+                           <i class="fa-solid fa-plus" data-name="daftar_penghuni"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger shadow-sm" data-name="data penghuni" onclick="remove_card(event)">
+                           <i class="fa-solid fa-trash" data-name="data penghuni"></i>
+                        </button>
+                     </div>
+                  </div>
+               {% endfor %}
+               <div class="d-flex flex-column align-items-center py-2">
+                  <div class="alert alert-warning d-none" role="alert">
+                     Tidak terdeteksi perubahan pada form Daftar Penghuni.
+                  </div>
+                  <div id="submit-button-container" class="d-flex flex-column">
+                     {{form_daftar_penghuni.submit(class="btn btn-success px-3", disabled=true)}}
+                     <small class="text-muted" id="sumbit_subtitle">atau Ctrl + Enter</small>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

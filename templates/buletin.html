@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Buletin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar.html" %}
+   <div class="container">
+      <div class="bg-white text-dark p-3 p-md-5 my-5 rounded shadow" id="buletin_review">
+         <div class="mb-2 mt-2 mt-md-0 mb-md-4 px-2">
+            <h2 class="judul_buletin mb-1 mb-md-2"><b>{{data["judul"]}}</b></h2>
+            <small class="d-block">Oleh: {{data["penulis"]}}</small>
+            <small class="d-block">{{data["waktu_dibuat"]}}</small>
+         </div>
+         {% set pos = namespace(value="right") %}
+         {% for el in data["konten"] %}
+            {% if el["text"] and el["gambar"] %}
+               {% if pos.value == "right" %}
+                  <div class="row py-3 flex-column-reverse flex-md-row">
+                     <div class="col-12 col-md-7 col-lg-8 px-4 px-md-0 ps-md-4 pe-md-3 d-flex align-items-center">
+                        <p class="text-buletin text-justify indent">
+                           {% if loop.index == 1 %}
+                              <b>{{data["lokasi"]}}, {{data["tanggal"]}}.</b>
+                           {% endif %}
+                           {{el["text"]}}
+                        </p>
+                     </div>
+                     <div class="col-12 col-md-5 col-lg-4 px-4 px-md-0 d-flex justify-content-center align-items-md-center">
+                        <img class="mb-3 buletin-img" src="{{el['gambar']}}" alt="" srcset="">
+                     </div>
+                  </div>
+                  {% set pos.value = 'left' %}
+               {% else %}
+                  <div class="row py-3">
+                     <div class="col-12 col-md-5 col-lg-4 px-4 px-md-0 d-flex justify-content-center align-items-md-center">
+                        <img class="mb-3 buletin-img" src="{{el['gambar']}}" alt="" srcset="">
+                     </div>
+                     <div class="col-12 col-md-7 col-lg-8 px-4 px-md-0 ps-md-3 d-flex align-items-center pe-md-4">
+                        <p class="text-buletin text-justify indent">
+                           {% if loop.index == 1 %}
+                              <b>{{data["lokasi"]}}, {{data["tanggal"]}}.</b>
+                           {% endif %}
+                           {{el["text"]}}
+                        </p>
+                     </div>
+                  </div>
+                  {% set pos.value = 'right' %}
+               {% endif %}
+            {% else %}
+               <div class="row py-3">
+                  <div class="col-12 px-4">
+                     <p class="text-buletin text-justify indent">
+                        {% if loop.index == 1 %}
+                           <b>{{data["lokasi"]}}, {{data["tanggal"]}}.</b>
+                        {% endif %}
+                        {{el["text"]}}
+                     </p>
+                  </div>
+               </div>
+            {% endif %}
+         {% endfor %}
+      </div>
+   </div>
+   {% include "partials/scripts.html" %}
+</body>
+</html>

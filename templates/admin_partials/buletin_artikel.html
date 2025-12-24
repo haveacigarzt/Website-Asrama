@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4 d-flex justify-content-between">
+      <a href="{{url_for('admin_buletin')}}">
+         <button class="btn btn-success shadow">
+            <i class="fa-solid fa-arrow-left"></i>
+         </button>
+      </a>
+      <h2 class="text-secondary">Admin - Edit Konten</h2>
+   </div>
+   <div class="container mb-3">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-2 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row mt-3 gy-4 shadow px-4 pb-4 pt-2 rounded bg-con-input">
+         <div class="d-flex justify-content-between align-items-center mt-3 mt-md-4">
+            <h3 class="mb-0">Edit Artikel Buletin</h3>
+            <a href="{{url_for('buletin', id=data['id'])}}" class="btn btn-success shadow-sm">Tinjau</a>
+         </div>
+         <form id="buletin_form" method="post" action="{{url_for('admin_buletin_artikel', id=data['id'])}}" class="content_form col-12" enctype="multipart/form-data">
+            {{form_buletin.hidden_tag()}}
+            <div class="row gy-3 mx-0">
+               <input type="hidden" name="id" value="{{data['id']}}">
+               <div class="col-12 my-2 my-md-4">
+                  <div class="row bg-input px-2 py-3 rounded shadow">
+                     <div class="col-sm-6 d-flex flex-column justify-content-between gap-2 gap-md-3">
+                        <div>
+                           <label class="form-label" for="judul"><h5>Judul</h5></label>
+                           <input required class="form-control" type="text" name="judul" id="judul" value="{{data['judul']}}" data-before="{{data['judul']}}">
+                        </div>
+                        <div>
+                           <label class="form-label" for="penulis"><h5>Penulis</h5></label>
+                           <input required class="form-control" type="text" name="penulis" id="penulis" value="{{data['penulis']}}" data-before="{{data['penulis']}}">
+                        </div>
+                        <div>
+                           <label class="form-label" for="subjudul"><h5>Sub Judul</h5></label>
+                           <textarea required class="form-control" name="subjudul" id="subjudul" cols="10" rows="5" data-before="{{data['subjudul']}}">{{data['subjudul']}}</textarea>
+                        </div>
+                        <div>
+                           <label class="form-label" for="lokasi"><h5>Lokasi</h5></label>
+                           <input required type="text" name="lokasi" id="lokasi" class="form-control" value="{{data['lokasi']}}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6 d-flex flex-column justify-content-between gap-2 gap-md-3">
+                        <div class="mt-2 mt-sm-0">
+                           <label class="form-label" for="tanggal"><h5>Tanggal</h5></label>
+                           <input required type="text" name="tanggal" class="form-control" value="{{data['tanggal']}}" id="tanggal">
+                        </div>
+                        <div class="col-6 mt-2 mt-sm-0 w-100 d-flex justify-content-center">
+                           <img src="{{data['thumbnail']}}" alt="" srcset="" class="w-50 output-image">
+                        </div>
+                        <div>
+                           <label class="form-label" for="thumbnail"><h5>Ganti thumbnail</h5></label>
+                           <input class="form-control" type="file" accept="image/png, image/jpeg" name="thumbnail" id="thumbnail" value="" data-before="" onchange="loadFileBuletin(event)">
+                        </div>
+                     </div>
+                     <div class="mt-3 mt-sm-4 d-flex align-items-center gap-2" id="control_tambah_paragraf">
+                        <h5 class="mb-0 d-block">Paragraf</h5>
+                        <button type="button" class="btn btn-light shadow-sm" title="Tambah Paragraf (Teks)" onclick="add_par(event, true)">
+                           <i class="fa-solid fa-align-right" title="Tambah Paragraf (Teks)"></i>
+                        </button>
+                        <button type="button" class="btn btn-light shadow-sm" title="Tambah Paragraf (Teks & Gambar)" onclick="add_par_gam(event, true)">
+                           <i class="fa-solid fa-align-right mx-1" title="Tambah Paragraf (Teks & Gambar)"></i>
+                           <i class="fa-solid fa-image mx-1" title="Tambah Paragraf (Teks & Gambar)"></i>
+                        </button>
+                     </div>
+                     {% for par in data["konten"] %}
+                     {% set index2 = loop.index %}
+                     <div class="row mx-1 my-2 m-md-3 px-1 pt-1 pb-2 px-md-3 py-md-3 flex-shrink-1 shadow rounded bg-artikel">
+                        {% if par["text"] and par["gambar"] %}
+                        <input type="hidden" name="is_gambar[]" value="1">
+                        <div class="col-12 col-md-5">
+                           <label class="form-label" for=""><h6>Teks</h6></label>
+                           <textarea  required class="form-control" name="par_text[]" id="" rows="6">{{par["text"]}}</textarea>
+                        </div>
+                        <div class="col-12 col-md-5 d-flex flex-column align-items-center mt-3 mt-md-0">
+                           <img src='{{par["gambar"]}}' width="200" height="170" alt="" class="output-image">
+                           <div class="mt-2 mt-md-3">
+                              <label class="form-label"><h6>Ganti gambar</h6></label>
+                              <input class="form-control" type="file" accept="image/png, image/jpeg" onchange="loadFileBuletin(event)" name="par_gambar[]">
+                              <input type="hidden"  name="par_gambar_lama[]" value="{{par['gambar']}}">
+                           </div>
+                        </div>
+                        {% else %}
+                        <input type="hidden" name="is_gambar[]" value="">
+                        <div class="col-12 col-md-10">
+                           <label for="" class="form-label"><h6>Teks</h6></label>
+                           <textarea name="par_text[]" required class="form-control" name="" id="" rows="6">{{par["text"]}}</textarea>
+                        </div>
+                        {% endif %}
+                        <div class="col-12 col-md-2 d-flex flex-md-column align-items-center justify-content-evenly mt-3 mt-md-0">
+                           <button type="button" class="btn btn-danger shadow-sm" title="Hapus Paragraf" onclick="remove_par(event)">
+                              <i class="fa-solid fa-trash" title="Hapus Paragraf"></i>
+                           </button>
+                           <button type="button" class="btn btn-secondary shadow-sm add_par_btn" title="Tambah Paragraf (Teks)" onclick="add_par(event)">
+                              <i class="fa-solid fa-align-right" title="Tambah Paragraf (Teks)"></i>
+                           </button>
+                           <button type="button" class="btn btn-secondary shadow-sm  add_par_gam_btn" title="Tambah Paragraf (Teks & Gambar)" onclick="add_par_gam(event)">
+                              <i class="fa-solid fa-align-right mx-1" title="Tambah Paragraf (Teks & Gambar)"></i>
+                              <i class="fa-solid fa-image mx-1" title="Tambah Paragraf (Teks & Gambar)"></i>
+                           </button>
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div class="alert alert-warning d-none w-auto mx-auto" role="alert">
+                  Tidak terdeteksi perubahan pada form Artikel Buletin Asrama.
+               </div>
+               <div class="d-flex align-items-center justify-content-center py-2">
+                  <a class="btn btn-secondary px-3 mx-3" href="">
+                     Batal
+                  </a>
+                  <div id="submit-button-container" class="d-inline-block">
+                     {{form_buletin.submit(class="btn btn-success px-3 mx-3", disabled=true)}}
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Beranda - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_daftar.html" %}
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-2 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <section id="daftar_section">
+      <div class="container">
+         <div id="daftar_section_inside" class="shadow">
+            <h2 class="text-center">Formulir Pendaftaran Penghuni Baru</h2>
+            <form>
+               <div class="input-group-daftar">
+                  <label for="exampleInputEmail1" class="form-label">Nama lengkap</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+               </div>
+               <div class="input-group-daftar">
+                  <label for="exampleInputPassword1" class="form-label">Tempat, tanggal lahir</label>
+                  <div class="d-flex gap-2">
+                     <input type="text" class="form-control" id="exampleInputPassword1">
+                     <input type="date" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="input-group-daftar">
+                  <label for="exampleInputPassword1" class="form-label">Asal daerah</label>
+                  <div class="d-flex gap-2">
+                     <input type="text" placeholder="Kecamatan" class="form-control" id="exampleInputPassword1">
+                     <input type="text" placeholder="Kabupaten/Kota" class="form-control" id="exampleInputPassword1">
+                     <input type="text" placeholder="Provinsi" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="d-flex gap-2">
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Nomor HP</label>
+                     <input type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Alamat email</label>
+                     <input type="email" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="d-flex gap-2">
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Nama orang tua/wali</label>
+                     <input type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Nomor HP orang tua/wali</label>
+                     <input type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="d-flex gap-2">
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Foto KTP</label>
+                     <input type="file" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Foto KK</label>
+                     <input type="file" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="d-flex gap-2">
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Foto Ijazah SMA</label>
+                     <input type="file" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="input-group-daftar w-100">
+                     <label for="exampleInputPassword1" class="form-label">Foto KTM</label>
+                     <input type="file" class="form-control" id="exampleInputPassword1">
+                  </div>
+               </div>
+               <div class="input-group-daftar border-0">
+                  <div class="form-check">
+                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                     <p >Dengan ini saya membaca, memahami, dan menyetujui hal-hal yang tercantum pada <input type="button" class="btn-check" data-bs-toggle="modal" data-bs-target="#modal_sk" id="toggler_sk"> <label class="toggler_modal_link" for="toggler_sk">Syarat dan Ketentuan</label> dan <input type="button" class="btn-check" data-bs-toggle="modal" data-bs-target="#modal_kp" id="toggler_kp"> <label class="toggler_modal_link" for="toggler_kp">Kebijakan Privasi</label> yang berlaku.</p>
+                  </div>
+               </div>
+               <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </section>
+   <!-- Modal -->
+   <div class="modal fade" id="modal_sk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog mx-auto my-4">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title d-flex align-items-center" id="exampleModalLabel"><img class="me-2" src="{{ url_for('static', filename='pictures/LOGO ASRAMA.png') }}" alt="" width="40" height="36">Asrama Mahasiswa St. Bonaventura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-footer justify-content-center">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="modal_kp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog mx-auto my-4">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title d-flex align-items-center" id="exampleModalLabel"><img class="me-2" src="{{ url_for('static', filename='pictures/LOGO ASRAMA.png') }}" alt="" width="40" height="36">Asrama Mahasiswa St. Bonaventura KP</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-footer justify-content-center">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script
+   src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+   integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+   crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <script>
+      window.addEventListener("load", () => {
+         const spinner_container = document.getElementById("spinner_container")
+         spinner_container.classList.add("spinner--hidden")
+         spinner_container.addEventListener("transitionend", () => {
+            if (document.body.contains(spinner_container)) {
+               document.body.removeChild(spinner_container)
+            }
+         })
+      })
+   </script>
+</body>
+</html>

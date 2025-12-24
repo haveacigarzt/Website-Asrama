@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4">
+      <h2 class="text-center text-dark">Admin - Edit Konten</h2>
+      {% include "admin_partials/edit_konten_navbar.html" %}
+   </div>
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-4 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row gy-4">
+         <form id="buletin_form" method="post" action="{{url_for('admin_buletin')}}" class="content_form col-12 shadow px-4 pb-4 pt-2 rounded bg-con-input" enctype="multipart/form-data">
+            {{form_buletin.hidden_tag()}}
+            <h3>Buletin Asrama</h3>
+            <div class="row gy-3 mx-0">
+               <div class="col-12 p-3 rounded shadow my-4 bg-input">
+                  <label class="form-label" for="deskripsi_buletin"><h5>Deskripsi buletin</h5></label>
+                  <textarea required class="form-control" name="deskripsi_buletin" id="deskripsi_buletin" cols="10" rows="5" data-before="{{buletin['deskripsi_buletin']}}">{{buletin['deskripsi_buletin']}}</textarea>
+               </div>
+               <div class="d-flex flex-column align-items-center py-2">
+                  <div class="alert alert-warning d-none" role="alert">
+                     Tidak terdeteksi perubahan pada form Buletin Asrama.
+                  </div>
+                  <div id="submit-button-container">
+                     {{form_buletin.submit(class="btn btn-success px-3", disabled=true)}}
+                  </div>
+               </div>
+            </div>
+         </form>
+         <div class="rounded shadow bg-input mt-4">
+            <div class="d-flex justify-content-between my-3 align-items-center pt-3 px-4">
+               <h3 class="mb-0">Artikel Buletin Asrama</h3>
+               <a href="{{url_for('admin_tambah_buletin')}}" title="Tambah artikel" type="submit" class="btn btn-success shadow">
+                  <i class="fa-solid fa-plus"></i>
+               </a>
+            </div>
+            <div class="row mx-0 gx-md-5 mb-4 overflow-x-auto flex-nowrap flex-lg-wrap">
+               {% if buletin["butir_buletin"]|length == 0 %}
+                  <p class="text-center deskripsi">Belum ada artikel</p>
+               {% endif %}
+               {% for el in buletin["butir_buletin"] %}
+                  <div class="col-8 col-sm-7 col-md-5 col-lg-4 col-xl-3 py-2">
+                     <div class="h-100 d-flex flex-column justify-content-between border-1 border-grey border rounded p-3">
+                        <a href="{{url_for('buletin', id=el['id'])}}" class="card buletin-card h-80 border-0 shadow">
+                           <div class="card-img-container h-50">
+                              <img src="{{ el['thumbnail'] }}" class="card-img-top w-100 h-100" alt="...">
+                           </div>
+                           <div class="card-body d-flex flex-column justify-content-between">
+                              <b class="deskripsi-large border-1 border-bottom">{{el["judul"]}}</b>
+                              <p class="card-text mb-2 overflow-y-auto deskripsi-small">{{el["subjudul"]}}</p>
+                              <small class="text-end border-1 border-top">{{el["waktu_dibuat"]}}</small>
+                           </div>
+                        </a>
+                        <div class="h-10 d-flex justify-content-evenly align-items-end">
+                           <a href="{{url_for('admin_buletin_artikel', id=el['id'])}}" type="button" class="btn btn-light shadow-sm" title="Edit artikel">
+                              <i class="fa-solid fa-pen-to-square"></i>
+                           </a>
+                           <button data-bs-toggle="modal" data-bs-target="#modal_delete_{{el['id']}}" class="btn btn-danger shadow-sm" title="Hapus artikel">
+                              <i class="fa-solid fa-trash"></i>
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="modal_delete_{{el['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-konfirmasi mx-auto my-3">
+                        <div class="modal-content">
+                           <div class="modal-header d-flex justify-content-center">
+                              <h5 class="modal-title"><img src="{{ url_for('static', filename='pictures/LOGO ASRAMA SM.png') }}" alt="" width="40" height="36"></h5>
+                           </div>
+                           <div class="modal-body">
+                              <p class="text-center deskripsi mb-4">Hapus artikel {{el["judul"]}}?</p>
+                              <form action="{{url_for('admin_delete_buletin_artikel', id=el['id'])}}" method="post" class="h-10 d-flex justify-content-evenly align-items-end">
+                                 <button type="submit" class="btn konfirmasi-btn btn-card px-2 py-1 shadow-sm h5 mb-0">Ya</button>
+                                 <button type="button" class="btn konfirmasi-btn btn-secondary px-2 py-1 shadow-sm h5 mb-0" data-bs-dismiss="modal">Batal</button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

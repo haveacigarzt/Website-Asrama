@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Admin - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar_admin.html" %}
+   <div class="container mt-3 mt-md-4">
+      <h2 class="text-center text-dark">Admin - Edit Konten</h2>
+      {% include "admin_partials/edit_konten_navbar.html" %}
+   </div>
+   <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}   
+            {% for category, message in messages %}
+               <div class="alert alert-{{category}} my-4 alert-dismissible show fade" role="alert">
+                  <span>{{ message }}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <div class="container mb-5">
+      <div class="row gy-4">
+         <form id="kepengurusan_form" method="post" action="{{url_for('admin_kepengurusan')}}" class="content_form col-12 shadow px-3 px-md-4 pb-4 pt-2 rounded bg-con-input">
+            {{form_kepengurusan.hidden_tag()}}
+            <h3>Kepengurusan</h3>
+            <div class="row gy-3 mx-0 justify-content-between">
+               <div class="w-48 p-2 p-md-3 rounded border-1 border shadow-sm">
+                  <label class="form-label" for="{{kepengurusan['fields'][0]['name']}}"><h5>{{kepengurusan["fields"][0]["name"].replace("_", " ")|capitalize}}</h5></label>
+                  <input required class="form-control" type="text" name="{{kepengurusan['fields'][0]['name']}}" id="{{kepengurusan['fields'][0]['name']}}" value="{{kepengurusan['fields'][0]['value']}}" data-before="{{kepengurusan['fields'][0]['value']}}">
+               </div>
+               {% for key, value in kepengurusan['fields'][1]['value'].items() %}
+                  <div class="w-48 p-2 p-md-3 rounded border-1 border shadow-sm">
+                     <label class="form-label" for="{{key}}"><h5>{{key.replace("_", " ")|capitalize}}</h5></label>
+                     <input required class="form-control" type="text" name="{{key}}" id="{{key}}" value="{{value}}" data-before="{{value}}">
+                  </div>
+               {% endfor %}
+               <div class="col-12 border-1 border p-2 p-md-3 rounded shadow">
+                  <h5>Seksi-seksi</h5>
+                  <div class="row gy-3 mx-0">
+                     {% for el in kepengurusan['fields'][2]['value'] %}
+                     {% set index = loop.index %}
+                        <div class="col-12 bg-input shadow p-2 p-sm-3 rounded">
+                           <div class="row">
+                              <div class="col-6">
+                                 <label class="form-label" for="{{el['name'].replace(' ', '_')|lower}}"><h6>Nama seksi</h6></label>
+                                 <input required class="form-control" type="text" name="nama_{{index}}" id="{{el['name'].replace('_', '')|lower}}" value="{{el['name']}}" data-before="{{el['name']}}">
+                              </div>
+                              <div class="col-6">
+                                 <label class="form-label" for="{{el['name'].replace(' ', '_')|lower}}_koordinator"><h6>Koordinator</h6></label>
+                                 <input required class="form-control" type="text" name="koordinator_{{index}}" id="{{el['name'].replace(' ', '_')|lower}}_koordinator" value="{{el['value']['koordinator']}}" data-before="{{el['value']['koordinator']}}">
+                              </div>
+                           </div>
+                           <h6 class="mt-3 mb-0">Anggota</h6>
+                           <div class="row my-2 mx-1 bg-artikel shadow rounded">
+                              {% for anggota in el['value']['anggota'] %}
+                              <div class="col-8 col-sm-9 col-md-10 py-2 px-2 px-sm-3">
+                                 <input type="text" class="form-control" name="anggota_{{index}}[]" data-before="{{anggota}}" value="{{anggota}}" required>    
+                              </div>
+                              <div class="col-4 col-sm-3 col-md-2 px-1 px-sm-2 col-button-edit-admin-kepengurusan gap-1 gap-lg-0">
+                                 <button type="button" class="btn btn-secondary shadow-sm" data-name="anggota_{{index}}" onclick="add_list(event)">
+                                    <i class="fa-solid fa-plus" data-name="anggota_{{index}}"></i>
+                                 </button>
+                                 <button type="button" class="btn btn-danger shadow-sm" data-name="anggota_{{index}}" onclick="remove_card(event)">
+                                    <i class="fa-solid fa-trash" data-name="anggota_{{index}}"></i>
+                                 </button>
+                              </div>
+                              {% endfor %}
+                           </div>
+                        </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div class="d-flex flex-column align-items-center py-2">
+                  <div class="alert alert-warning d-none" role="alert">
+                     Tidak terdeteksi perubahan pada form Kepengurusan.
+                  </div>
+                  <div id="submit-button-container" class="d-flex flex-column">
+                     {{form_kepengurusan.submit(class="btn btn-success px-3", disabled=true)}}
+                     <small class="text-muted" id="sumbit_subtitle">atau Ctrl + Enter</small>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   {% include "partials/scripts_admin.html" %}
+</body>
+</html>

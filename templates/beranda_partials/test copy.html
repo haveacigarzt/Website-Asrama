@@ -1,0 +1,40 @@
+<section class="pembinaan-section">
+  <div class="pembinaan-scroll">
+    <div class="pembinaan-grid">
+      <div class="card-wrap">
+        <div class="card-pembinaan">Card 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa dolor facilis quisquam velit inventore aspernatur non consectetur, quaerat doloribus iste ex eum. Eius rem odit officiis. Consequuntur, earum! Dicta, nostrum.</div>
+      </div>
+      <div class="card-wrap">
+        <div class="card-pembinaan">Card 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  /* SECTION UTAMA */
+  .card-pembinaan {
+    background-color: rgb(142, 142, 79);
+    width: 200px;
+    height: 150px;
+    margin: 50px;
+    padding: 10px;
+    border-radius: 10px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-pembinaan:hover {
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: unset;
+    text-overflow: unset;
+    
+    height: fit-content;
+  }
+
+</style>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Not Found - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar.html" %}
+   <div class="container">
+      <div class="mt-5 p-5 rounded d-flex flex-column align-items-center bg-light shadow-sm">
+         <img src="{{ url_for('static', filename='pictures/icons8-not-found-100.png') }}" width="90" class="mb-2" alt="" srcset="">
+         <h1 class="mb-2">404: Not found</h1>
+         <h3>Halaman tidak ditemukan!</h3>
+      </div>
+   </div>
+   {% include "partials/scripts.html" %}
+</body>
+</html>

@@ -1,0 +1,120 @@
+<span class="anchor" id="tentang_anchor"></span>
+<div class="container">
+   {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}   
+         {% for category, message in messages %}
+            <div class="alert alert-{{category}} my-2 alert-dismissible show fade" role="alert">
+               <span>{{ message }}</span>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         {% endfor %}
+      {% endif %}
+   {% endwith %}
+</div>
+<section id="tentang_section" class="shadow">
+   <div class="container">
+      <div id="tentang_section_inside">
+         <h1 class="mb-md-2 mb-lg-3 narrow-letter-1">Asrama Mahasiswa Santo Bonaventura Pontianak</h1>
+         <div class="carousel-inside-text-link mt-md-1" onmouseleave="unhover_the_link(event)" onmouseenter="hover_the_link(event)" onclick="window.open('https://www.brudermtb.org/', '_blank')">
+            <h6 class="mb-0 d-flex align-items-center"><img src="{{ url_for('static', filename='pictures/cross.png') }}" class="logo-img" alt='<i class="fas fa-cross me-sm-3 me-2 fa-primary"></i>' srcset="">Dibina Langsung oleh Bruder MTB</h6>
+            <a class="position-absolute top-0 start-100 translate-middle badge rounded btn btn-info shadow"><i class="fas fa-circle-info"></i><span class="visually-hidden">find location</span></a>
+         </div>
+         <div class="carousel-inside-text-link" onmouseleave="unhover_the_link(event)" onmouseenter="hover_the_link(event)" onclick="window.open('https://www.google.com/maps/place/Asrama+Mahasiswa+Santo+Bonaventura+(Bruder+MTB)/@-0.061606,109.349711,15z/data=!4m6!3m5!1s0x2e1d59920a1cc0cf:0x829f95b993340bb6!8m2!3d-0.0616059!4d109.349711!16s%2Fg%2F11b6_f7r45?hl=en&entry=ttu', '_blank')">
+            <h6 class="mb-0 d-flex align-items-center"><img src="{{ url_for('static', filename='pictures/map.png') }}" class="logo-img" alt='' srcset=""><i class="fa-solid fa-plus-minus me-1"></i>100m dari Universitas Tanjungpura</h6>
+            <a class="position-absolute top-0 start-100 translate-middle badge rounded btn btn-info shadow"><i class="fas fa-magnifying-glass-location"></i><span class="visually-hidden">find location</span></a>
+         </div>
+         <p class="d-inline-block w-100 w-lg-70 deskripsi my-1 my-md-2 my-lg-3" id="deskripsi_asrama">{{tentang["deskripsi_asrama"]}}</p>
+         <div class="d-flex justify-content-between">
+            <div id="button_group_daftar" class="btn-group" role="group" aria-label="Basic outlined example">
+               <button type="button" class="btn btn-outline-primary disabled text-white-2">{{ tentang["slot_tersedia"] }} Kamar Tersedia</button>
+               <a href="https://forms.gle/dktQtL1qEs91KAXp6" target="_blank" type="button" class="btn btn-primary d-flex align-items-center justify-content-center">Daftar Sekarang</a>
+            </div>
+            <div id="vm_tp">
+               <div class="toggle-visi" style="width: min-content;">
+                  <input type="button" class="btn-check" data-bs-toggle="modal" data-bs-target="#modal_visi" id="success-outlined">
+                  <label class="btn btn-outline-success toggle-visi-btn" for="success-outlined">Visi & Misi Asrama</label>
+                  <input type="button" class="btn-check" data-bs-toggle="modal" data-bs-target="#modal_tatib" id="danger-outlined">
+                  <label class="btn btn-outline-danger toggle-visi-btn" for="danger-outlined">Tatib & Persyaratan</label>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="my-carousel-caption">
+         <div class="container my-carousel-caption-fill pb-1 pb-md-0">
+            <small>Gambar&copy;VVV Langit</small>
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <div class="modal fade" id="modal_visi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog mx-auto my-4">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title d-flex align-items-center"><img class="me-2" src="{{ url_for('static', filename='pictures/LOGO ASRAMA.png') }}" alt="" width="40" height="36">Asrama Mahasiswa St. Bonaventura</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <div class="row gap-4 content">
+                  <div class="col green-border p-3">
+                     <h1 class="text-center">Visi</h1>
+                     <div class="p-2 vm_content">
+                        <p class="text-center deskripsi mb-0">
+                           {{ tentang["visi"] }}
+                        </p>
+                     </div>
+                  </div>
+                  <div class="col green-border p-3">
+                     <h1 class="text-center">Misi</h1>
+                     <div class="p-2 vm_content">
+                        <p class="text-center deskripsi mb-0">
+                           {{tentang["misi"]}}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <div class="modal fade" id="modal_tatib" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog mx-auto my-4">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title d-flex align-items-center" id="exampleModalLabel"><img class="me-2" src="{{ url_for('static', filename='pictures/LOGO ASRAMA.png') }}" alt="" width="40" height="36">Asrama Mahasiswa St. Bonaventura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <div class="row gap-4 content" id="tatib_persyaratan">
+                  <div class="col purple-border py-3 px-0">
+                     <h1 class="text-center">Tata Tertib</h1>
+                     <div class="py-2 ps-0 pe-3">
+                        <ul>
+                           {% for el in tentang["tatib"] %}
+                              <li class="deskripsi">{{ el }}</li>
+                           {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col purple-border py-3 px-0">
+                     <h1 class="text-center">Persyaratan</h1>
+                     <div class="py-2 ps-0 pe-3">
+                        <ul>
+                           {% for el in tentang["persyaratan"] %}
+                              <li class="deskripsi">{{ el }}</li>
+                           {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

@@ -1,0 +1,68 @@
+<nav id="mainNav" class="navbar navbar-expand-xl navbar-light bg-light sticky-top shadow-lg text-black">
+  <div class="container">
+      <a class="navbar-brand" href="{{ url_for('index')}}"><img class="me-2" src="{{ url_for('static', filename='pictures/LOGO ASRAMA SM.png') }}" alt="" width="40" height="36"><h3 class="d-flex mb-0"> Asrama Mahasiswa St. Bonaventura</h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-lg-end" id="navbarSupportedContent">
+         <ul class="navbar-nav flex-row align-items-center justify-content-evenly mt-2 pt-3 mb-1 my-lg-0 pt-lg-1 fw-semibold border-1 border-top border-secondary border-opacity-50 gap-xl-3">
+            {% if login or buletin == 'true'%}
+               <li class="nav-item mx-1 mx-1">
+                  <a class="nav-link" aria-current="page" href="{{ url_for('index')}}"><i class="fa fa-home"></i></a>
+               </li>
+            {% else %}
+               <li class="nav-item mx-1">
+                  <a class="nav-link link h5 mb-0" aria-current="page" href="{{ url_for('index')}}#tentang_anchor" data-anchor="tentang_anchor">Tentang</a>
+               </li>
+               <li class="nav-item mx-1">
+                  <a class="nav-link link h5 mb-0" href="{{ url_for('index')}}#fasilitas_anchor" data-anchor="fasilitas_anchor">Fasilitas</a>
+               </li>
+               <li class="nav-item mx-1">
+                  <a class="nav-link link h5 mb-0" href="{{ url_for('index')}}#kegiatan_anchor" data-anchor="kegiatan_anchor">Kegiatan</a>
+               </li>
+               <li class="nav-item d-flex align-items-center">
+                  <a href="{{ url_for('index')}}#kontak_anchor" class="btn my-btn-outline-green text-secondary px-2 py-1 mx-2 shadow fw-semibold nav-link link h5 mb-0" data-anchor="kontak_anchor">Kontak</a>
+               </li>
+               {% if not is_admin %}
+                  <li class="nav-item d-flex align-items-center d-none d-lg-flex">
+                     <a href="{{ url_for('login')}}" class="btn my-btn-outline-red text-secondary px-2 py-1 mx-2 shadow fw-semibold nav-link h5 mb-0">Login</a>
+                  </li>
+               {% endif %}
+            {% endif %}
+         </ul>
+         {% if not is_admin %}
+            <div class="nav-item d-flex align-items-center justify-content-center d-lg-none my-3" id="login_div_small">
+               <a href="{{ url_for('login')}}" class="btn btn-outline-danger text-white px-2 py-1 mx-2 shadow fw-semibold nav-link h5 mb-0">Login</a>
+            </div>
+         {% endif %}
+         {% if is_admin %}
+            <div class="border-1 border-black border rounded px-3 d-flex navbar-nav flex-row mx-auto mx-xl-0" id="nav_admin_group_btn">
+               <div class="nav-item my-2">
+                  <a class="nav-link active h5 mb-0 mx-2" href="{{ url_for('admin_tentang')}}">Admin</a>
+               </div>
+               <div class="nav-item my-2 d-flex align-items-center">
+                  <div class="mb-0">
+                     <button data-bs-toggle="modal" data-bs-target="#modal_logout" class="btn my-btn-outline-red text-secondary px-2 py-1 mx-2 shadow fw-semibold nav-link h5 mb-0">Logout</button>
+                  </div>
+               </div>
+            </div>
+         {% endif %}
+      </div>
+  </div>
+</nav>
+<div class="modal fade" id="modal_logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-konfirmasi mx-auto my-4">
+      <div class="modal-content">
+         <div class="modal-header d-flex justify-content-center">
+            <h5 class="modal-title"><img src="{{ url_for('static', filename='pictures/LOGO ASRAMA SM.png') }}" alt="" width="40" height="36"></h5>
+         </div>
+         <div class="modal-body">
+            <p class="text-center deskripsi mb-4">Logout sekarang?</p>
+            <form action="{{url_for('logout')}}" method="post" class="d-flex justify-content-evenly">
+               <button type="submit" class="btn konfirmasi-btn btn-card px-2 py-1 shadow-sm h5 mb-0">Ya</button>
+               <button type="button" class="btn konfirmasi-btn btn-secondary px-2 py-1 shadow-sm h5 mb-0" data-bs-dismiss="modal">Batal</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

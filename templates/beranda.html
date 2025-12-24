@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Beranda - AM St. Bonaventura</title>
+   <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/LOGO ASRAMA.ico') }}"/>
+   {% include "partials/links.html" %}
+</head>
+<body>
+   {% include "partials/spinner.html" %}
+   {% include "partials/navbar.html" %}
+   {% include "beranda_partials/tentang.html" %}
+   {% include "beranda_partials/pembinaan.html" %}
+   {% include "beranda_partials/fasilitas.html" %}
+   {% include "beranda_partials/buletin.html" %}
+   {% include "beranda_partials/kegiatan.html" %}
+   {% include "beranda_partials/arti_logo.html" %}
+   {% include "beranda_partials/penghuni.html" %}
+   {% include "beranda_partials/kontak.html" %}
+   {% include "partials/scripts.html" %}
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grid Overlap Card</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+    <div class="grid-wrapper">
+
+      <div class="card red">
+        <h3>Card Utama</h3>
+        <p>
+          Ini adalah card utama di dalam container.
+          Layout tetap normal dan responsif.
+        </p>
+      </div>
+
+      <div class="card green">
+        <h4>Floating Card</h4>
+        <p>
+          Card ini overlap tanpa top / left
+        </p>
+        <span class="time">2:57</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
+
+<style>
+    * {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  background: #0f172a;
+  color: white;
+  margin: 0;
+  padding: 40px;
+}
+
+/* PAGE CENTER */
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+/* GRID WRAPPER */
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 600px;
+  background-color: aqua;
+}
+
+/* ALL CARDS SHARE SAME GRID CELL */
+.card {
+  /* grid-area: 1 / 1; */
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.35);
+}
+
+/* MAIN CARD */
+.card.red {
+  background: #1e293b;
+  min-height: 180px;
+}
+
+/* FLOATING CARD */
+.card.green {
+  background: #2f3440;
+  width: 320px;
+  justify-self: end;
+  align-self: center;
+
+  /* MAGIC PART */
+  transform: translateY(40%);
+}
+
+/* TEXT */
+h3, h4 {
+  margin: 0 0 10px;
+}
+
+</style>

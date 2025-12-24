@@ -1,0 +1,38 @@
+<section id="buletin_section" class="pt-3 pb-4 pt-lg-4 pb-lg-5">
+   <div class="container">
+      {% set id_section = namespace(value="buletin_section_inside") %}
+      {% if buletin["butir_buletin"]|length == 0 %}
+         {% set id_section.value = 'buletin_section_inside_empty' %}
+      {% endif %}
+      <div id="{{ id_section.value }}" class="pt-4">
+         <h2 class="mb-2 pe-4 mt-1 border-bottom border-1 d-inline-block mb-lg-3">Buletin Asrama</h2>
+         <p class="deskripsi mb-1">{{ buletin["deskripsi_buletin"]}}</p>
+         {% if buletin["butir_buletin"]|length == 0 %}
+            <p class="text-center deskripsi">Belum ada artikel</p>
+         {% endif %}
+         <div class="row overflow-x-scroll flex-nowrap d-flex pe-lg-5 gx-md-5 mb-3 mb-lg-4">
+            {% for el in buletin["butir_buletin"] %}
+            <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 py-3 col-8 col-buletin-card">
+               <a href="/buletin/{{ el['id'] }}" class="card buletin-card h-100 border-0 shadow">
+                  <div class="card-img-container">
+                     <img src="{{ el['thumbnail'] }}" class="card-img-top w-100 h-100" alt="...">
+                  </div>
+                  <div class="card-body d-flex flex-column justify-content-between">
+                     <b class="deskripsi-large border-1 border-bottom overflow-judul-buletin">{{el["judul"]}}</b>
+                     <p class="card-text mb-2 overflow-y-auto deskripsi-small">{{el["subjudul"]}}</p>
+                     <small class="text-end border-1 border-top">{{el["waktu_dibuat"]}}</small>
+                  </div>
+               </a>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="row mt-0">
+         <div class="col-12 text-end">
+            <div class="pe-2 credit-pic-black pb-1 pb-md-0">
+               <small>Gambar&copy;Mikael Repormanto</small>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
