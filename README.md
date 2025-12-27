@@ -1,4 +1,4 @@
-## TUTORIAL PENGGUNAAN
+## HOW TO USE
 
 --------------------------------------------------
 ### 1. PERSYARATAN
