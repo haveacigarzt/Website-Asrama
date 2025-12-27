@@ -15,7 +15,22 @@ Website-Asrama/
 ├── queries.py
 ├── .env (buat sendiri)
 └── README.txt
-
+│
+├── src/
+│   ├── __init__.py
+│   ├── main.py              # Entry point aplikasi
+│   ├── email_service.py     # Logika pengiriman email (SMTP)
+│   └── config.py            # Load & validasi environment variable
+│
+├── tests/
+│   └── test_email.py        # Unit test (opsional)
+│
+├── .env                     # Environment variable (JANGAN di-commit)
+├── .env.example             # Contoh konfigurasi environment
+├── .gitignore               # File/folder yang diabaikan Git
+├── requirements.txt         # Dependency project
+├── README.md                # Dokumentasi project
+└── LICENSE                  # Lisensi (opsional)
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
 --------------------------------------------------
@@ -23,8 +38,7 @@ Website-Asrama/
 Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 - python -m venv namavirtualenvironment
-Lalu aktifkan:
-- source namavirtualenvironment/Scripts/activate
+- Lalu aktifkan dengan: source namavirtualenvironment/Scripts/activate
 
 --------------------------------------------------
 ### 4. INSTALL DEPENDENCY
