@@ -8,29 +8,13 @@
 ### 2. STRUKTUR PROJECT
 --------------------------------------------------
 Website-Asrama/
-│
-├── static/
+├── static/ <br>
 ├── templates/
 ├── app.py
 ├── queries.py
 ├── .env (buat sendiri)
 └── README.txt
-│
-├── src/
-│   ├── __init__.py
-│   ├── main.py              # Entry point aplikasi
-│   ├── email_service.py     # Logika pengiriman email (SMTP)
-│   └── config.py            # Load & validasi environment variable
-│
-├── tests/
-│   └── test_email.py        # Unit test (opsional)
-│
-├── .env                     # Environment variable (JANGAN di-commit)
-├── .env.example             # Contoh konfigurasi environment
-├── .gitignore               # File/folder yang diabaikan Git
-├── requirements.txt         # Dependency project
-├── README.md                # Dokumentasi project
-└── LICENSE                  # Lisensi (opsional)
+
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
 --------------------------------------------------
