@@ -7,13 +7,13 @@
 --------------------------------------------------
 ### 2. STRUKTUR PROJECT
 --------------------------------------------------
-Website-Asrama/
+Website-Asrama/ <br>
 ├── static/ <br>
-├── templates/
-├── app.py
-├── queries.py
-├── .env (buat sendiri)
-└── README.txt
+├── templates/ <br>
+├── app.py <br>
+├── queries.py <br>
+├── .env (buat sendiri) <br>
+└── README.txt <br>
 
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
