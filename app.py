@@ -20,7 +20,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.getenv('flask_secret_key')
+app.config['SECRET_KEY'] = "d6cebd5c93ba466b060a0949bc13b331"
 
 app.url_map.strict_slashes = False
 
@@ -64,6 +64,7 @@ def index():
    # 15/12/2023
    form_feedback = FeedbackForm()
    if request.method == "POST" and form_feedback.validate_on_submit():
+      print("test")
       text = request.form['saran']
       subject = "Feedback pengguna website Asrama Mhs Santo Bonaventura"
       
@@ -88,6 +89,8 @@ def index():
 
       except Exception as e:
          flash(f"Gagal mengirim saran: {str(e)}", "danger")
+
+      return redirect(url_for("index"))
       
 
    

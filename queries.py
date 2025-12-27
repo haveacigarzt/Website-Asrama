@@ -10,7 +10,7 @@ load_dotenv()
 
 upload_folder = "static/pictures/contents"
 
-url_db = os.getenv('url_db_atlas')
+url_db = "mongodb+srv://afriandypramana:bczFDLSJSzrATKdP@cluster0.yqmayik.mongodb.net/"
 
 client = AsyncIOMotorClient(url_db)
 
