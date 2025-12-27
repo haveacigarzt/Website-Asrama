@@ -3,7 +3,8 @@
 --------------------------------------------------
 ### 1. PERSYARATAN
 - Python 3.14 atau lebih baru
-- Akun email (Gmail / Outlook / Yahoo)
+- Akun email & sandi aplikasi untuk SMTP
+- Cara membuat sandi aplikasi untuk SMTP: https://www.rumahweb.com/journal/cara-mengaktifkan-application-password-gmail/
 
 --------------------------------------------------
 ### 2. STRUKTUR PROJECT
