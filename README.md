@@ -18,7 +18,6 @@ Website-Asrama/ <br>
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
 --------------------------------------------------
---------------------------------------------------
 Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 - python -m venv namavirtualenvironment
