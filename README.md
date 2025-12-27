@@ -2,13 +2,11 @@
 
 --------------------------------------------------
 ### 1. PERSYARATAN
---------------------------------------------------
 - Python 3.14 atau lebih baru
 - Akun email (Gmail / Outlook / Yahoo)
 
 --------------------------------------------------
 ### 2. STRUKTUR PROJECT
---------------------------------------------------
 Website-Asrama/ <br>
 ├── static/ <br>
 ├── templates/ <br>
@@ -19,7 +17,6 @@ Website-Asrama/ <br>
 
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
---------------------------------------------------
 Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 - python -m venv namavirtualenvironment
@@ -27,14 +24,12 @@ Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 --------------------------------------------------
 ### 4. INSTALL DEPENDENCY
---------------------------------------------------
 Jalankan pada terminal/command promt:
 
 pip install requirements.txt
 
 --------------------------------------------------
 ### 5. BUAT FILE .env
---------------------------------------------------
 File ini berfungsi sebagai konfigurasi program. Buat dan simpan di Website-Asrama/
 
 Isi file .env:
@@ -51,7 +46,6 @@ Atau pakai punya saya:
 
 --------------------------------------------------
 ### 6. LAUNCH PROGRAM
---------------------------------------------------
 Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 - python app.py
