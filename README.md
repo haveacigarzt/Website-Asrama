@@ -1,3 +1,5 @@
+## TUTORIAL PENGGUNAAN
+
 --------------------------------------------------
 ### 1. PERSYARATAN
 --------------------------------------------------
@@ -31,7 +33,7 @@ Jalankan pada terminal/command promt:
 pip install requirements.txt
 
 --------------------------------------------------
-### 5. MEMBUAT FILE .env
+### 5. BUAT FILE .env
 --------------------------------------------------
 File ini berfungsi sebagai konfigurasi program. Buat dan simpan di Website-Asrama/
 
@@ -46,3 +48,13 @@ Atau pakai punya saya:
 - email=pramanaafriandy@gmail.com
 - email_pass=uizeurequennqfcw
 - receiver_email=afriandy193@gmail.com
+
+--------------------------------------------------
+### 6. LAUNCH PROGRAM
+--------------------------------------------------
+Jalankan pada terminal/command promt di direktori Website-Asrama/:
+
+- python app.py
+- Lalu buka localhost:4000 pada browser
+- Ctrl+C pada terminal/command promt untuk menghentikan program
+- Username/Password = admin/adminbona
