@@ -51,5 +51,5 @@ Jalankan pada terminal/command promt di direktori Website-Asrama/:
 
 - python app.py
 - Lalu buka localhost:4000 pada browser
-- Ctrl+C pada terminal/command promt untuk menghentikan program
-- Username/Password = admin/adminbona
+- Untuk menghentikan program: Ctrl+C pada terminal/command promt
+- Username/Password admin pada website asrama: admin/adminbona
