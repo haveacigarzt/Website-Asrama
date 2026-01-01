@@ -27,7 +27,7 @@ Jalankan pada terminal/command promt di direktori Website-Asrama/:
 ### 4. INSTALL DEPENDENCY
 Jalankan pada terminal/command promt:
 
-pip install requirements.txt
+pip install -r requirements.txt
 
 --------------------------------------------------
 ### 5. BUAT FILE .env
