@@ -14,7 +14,7 @@ Website-Asrama/ <br>
 ├── app.py <br>
 ├── queries.py <br>
 ├── .env (buat sendiri) <br>
-└── README.txt <br>
+└── README.md <br>
 
 --------------------------------------------------
 ### 3. BUAT VIRTUAL ENVIRONMENT (OPSIONAL)
