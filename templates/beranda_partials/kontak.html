@@ -44,12 +44,13 @@
                      <button onclick="copyContent(event)" class="right-floating badge rounded btn btn-info shadow small" data-copy="{{ kontak['email'] }}"><small>Copy</small></button>
                   </div>
                </div>
-               <div id="feedback_div" class="border-1 border border-secondary rounded d-none d-lg-flex m-0">
-                  <textarea name="saran" id="" class="form-control" placeholder="Beri kami masukan/saran mengenai website ini." rows="1" required></textarea>
+               <form action="{{url_for('index')}}" method="post" id="feedback_div" class="border-1 border border-secondary rounded d-none d-lg-flex m-0">
+                  {{form_feedback.hidden_tag()}}
+                  {{form_feedback.saran(class="form-control", placeholder="Beri kami masukan/saran mengenai website ini.", rows="2")}}
                   <div class="d-flex justify-content-end">
-                     <button type="button" class="btn btn-primary mt-2 btn-sm shadow-sm">Kirim</button>
+                     {{form_feedback.submit(class="btn btn-primary mt-2 btn-sm shadow-sm")}}
                   </div>
-               </div>
+               </form>
             </div>
          </div>
          <div class="col-3 d-lg-none">
@@ -64,9 +65,8 @@
       <form action="{{url_for('index')}}" method="post" id="feedback_div" class="trans-black-box rounded d-lg-none">
          {{form_feedback.hidden_tag()}}
          {{form_feedback.saran(class="form-control", placeholder="Beri kami masukan/saran mengenai website ini.", rows="2")}}
-         <div class="d-flex justify-content-end" class="d-flex flex-column">
+         <div class="d-flex justify-content-end">
             {{form_feedback.submit(class="btn btn-primary mt-2 btn-sm shadow-sm")}}
-            <small class="text-muted" id="sumbit_subtitle">atau Ctrl + Enter</small>
          </div>
       </form>
       <div class="row mt-2 mt-lg-0">
